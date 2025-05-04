@@ -122,67 +122,55 @@
 
 
     <!-- Services Section -->
-    <section class="py-5 bg-light" id="servicios">
+    <section class="services" id="servicios">
         <div class="container">
-            <div class="text-center mb-5">
-                <h2 class="mb-3">Mis Servicios</h2>
+            <div class="text-center">
+                <h2>Mis Servicios</h2>
+                <div class="service-divider"></div>
                 <p class="lead">Soluciones nutricionales adaptadas a tus necesidades</p>
             </div>
-            <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-apple-alt"></i>
-                        </div>
-                        <h4>Consulta Nutricional</h4>
-                        <p>Evaluación completa de tu estado nutricional y creación de un plan alimenticio personalizado según tus objetivos.</p>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">    
+                        <i class="fas fa-apple-alt"></i>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-weight"></i>
-                        </div>
-                        <h4>Control de Peso</h4>
-                        <p>Programas especializados para pérdida o ganancia de peso de forma saludable y sostenible en el tiempo.</p>
+                    <h4>Consulta Nutricional</h4>
+                    <p>Evaluación completa de tu estado nutricional y creación de un plan alimenticio personalizado según tus objetivos.</p>
+                </div>              
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-weight"></i>
                     </div>
+                    <h4>Control de Peso</h4>
+                    <p>Programas especializados para pérdida o ganancia de peso de forma saludable y sostenible en el tiempo.</p>
                 </div>
-                <div class="col-md-4">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-running"></i>
-                        </div>
-                        <h4>Nutrición Deportiva</h4>
-                        <p>Planes nutricionales específicos para deportistas que buscan mejorar su rendimiento y recuperación.</p>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-running"></i>
                     </div>
+                    <h4>Nutrición Deportiva</h4>
+                    <p>Planes nutricionales específicos para deportistas que buscan mejorar su rendimiento y recuperación.</p>
                 </div>
-                <div class="col-md-4">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-heartbeat"></i>
-                        </div>
-                        <h4>Nutrición Clínica</h4>
-                        <p>Atención especializada para condiciones como diabetes, hipertensión, colesterol alto y otras patologías.</p>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-heartbeat"></i>
                     </div>
+                    <h4>Nutrición Clínica</h4>
+                    <p>Atención especializada para condiciones como diabetes, hipertensión, colesterol alto y otras patologías.</p>
                 </div>
-                <div class="col-md-4">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-utensils"></i>
-                        </div>
-                        <h4>Educación Alimentaria</h4>
-                        <p>Talleres y sesiones educativas para aprender a elegir, preparar y disfrutar alimentos saludables.</p>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-utensils"></i>
                     </div>
+                    <h4>Educación Alimentaria</h4>
+                    <p>Talleres y sesiones educativas para aprender a elegir, preparar y disfrutar alimentos saludables.</p>
                 </div>
-                <div class="col-md-4">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-baby"></i>
-                        </div>
-                        <h4>Nutrición Infantil</h4>
-                        <p>Asesoramiento para padres sobre la alimentación adecuada en cada etapa del desarrollo infantil.</p>
-                    </div>
-                </div>
+                
             </div>
         </div>
     </section>
@@ -191,15 +179,14 @@
 
     <!-- CTA Section -->
     <section class="cta-section" id="agendar">
+        <div class="cta-bg"></div>
+        <div class="cta-decoration-1"></div>
+        <div class="cta-decoration-2"></div>
         <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-8 text-center">
-                    <h2 class="mb-4">¿Listo para transformar tu alimentación?</h2>
-                    <p class="lead mb-4">Agenda tu consulta hoy mismo y comienza tu camino hacia una vida más saludable</p>
-                    <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#appointmentModal">
-                        Agendar Consulta
-                    </button>
-                </div>
+            <div class="cta-content">
+                <h2 class="cta-title">¿Listo para transformar tu alimentación?</h2>
+                <p class="cta-text">Agenda tu consulta hoy mismo y comienza tu camino hacia una vida más saludable</p>
+                <button class="btn btn-primary btn-lg" id="open-modal">Agendar Consulta</button>
             </div>
         </div>
     </section>
@@ -262,60 +249,78 @@
 
 
     <!-- Contact Section -->
-    <section class="py-5" id="contacto">
+    <section class="contact" id="contacto">
+        <div class="contact-decoration-1"></div>
+        <div class="contact-decoration-2"></div>
+        <div class="contact-decoration-3"></div>
+        <div class="contact-decoration-4"></div>
+        <div class="contact-decoration-5"></div>
         <div class="container">
-            <div class="row">
-                <div class="col-lg-5 mb-4 mb-lg-0">
-                    <h2 class="mb-4">Contacto</h2>
-                    <p class="mb-4">Si tienes alguna pregunta o deseas más información sobre mis servicios, no dudes en contactarme.</p>
-                    <div class="mb-4">
-                        <div class="d-flex align-items-center mb-3">
-                            <i class="fas fa-map-marker-alt me-3" style="color: var(--primary-green);"></i>
-                            <p class="mb-0">Av. Libertador 1234, Piso 3, Oficina 302</p>
+            <div class="contact-grid">
+                <div class="contact-content">
+                    <div>
+                        <h2 class="section-title">Contacto</h2>
+                        <div class="section-divider"></div>
+                    </div>
+                    
+                    <p class="contact-texto">Si tienes alguna pregunta o deseas más información sobre mis servicios, no dudes en contactarme.</p>
+                        
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <span>Av. Libertador 1234, Piso 3, Oficina 302</span>
                         </div>
-                        <div class="d-flex align-items-center mb-3">
-                            <i class="fas fa-phone me-3" style="color: var(--primary-green);"></i>
-                            <p class="mb-0">+54 11 5555-5555</p>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <span>+54 11 5555-5555</span>
                         </div>
-                        <div class="d-flex align-items-center mb-3">
-                            <i class="fas fa-envelope me-3" style="color: var(--primary-green);"></i>
-                            <p class="mb-0">info@nutricionbienestar.com</p>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <span>info@nutricionbienestar.com</span>
                         </div>
                     </div>
-                    <div class="d-flex">
-                        <a href="#" class="social-icon me-2"><i class="fab fa-facebook-f text-white"></i></a>
-                        <a href="#" class="social-icon me-2"><i class="fab fa-instagram text-white"></i></a>
-                        <a href="#" class="social-icon me-2"><i class="fab fa-twitter text-white"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in text-white"></i></a>
+
+                    <div class="social-icons">
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-twitter"></i>
+                        </a>
                     </div>
                 </div>
-                <div class="col-lg-7">
-                    <div class="card border-0 shadow-sm">
-                        <div class="card-body p-4">
-                            <h4 class="mb-4">Envíame un mensaje</h4>
-                            <form>
-                                <div class="row">
-                                    <div class="col-md-6 mb-3">
-                                        <label for="contactName" class="form-label">Nombre</label>
-                                        <input type="text" class="form-control" id="contactName" required>
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <label for="contactEmail" class="form-label">Email</label>
-                                        <input type="email" class="form-control" id="contactEmail" required>
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="contactSubject" class="form-label">Asunto</label>
-                                    <input type="text" class="form-control" id="contactSubject" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="contactMessage" class="form-label">Mensaje</label>
-                                    <textarea class="form-control" id="contactMessage" rows="5" required></textarea>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Enviar Mensaje</button>
-                            </form>
+
+                <div class="contact-form-container">
+                    <h3 class="contact-form-title">Envíame un mensaje</h3>
+                    <form id="contact-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="contactName" class="form-label">Nombre</label>
+                                <input type="text" class="form-control" id="contactName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contactEmail" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="contactEmail" required>
+                            </div>
                         </div>
-                    </div>
+                        <div class="form-group">
+                            <label for="contactSubject" class="form-label">Asunto</label>
+                            <input type="text" class="form-control" id="contactSubject" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactMessage" class="form-label">Mensaje</label>
+                            <textarea class="form-control" id="contactMessage" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Enviar Mensaje</button>
+                    </form>
                 </div>
             </div>
         </div>
