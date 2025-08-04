@@ -1,0 +1,281 @@
+{% load static %}
+{% load django_browser_reload %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitar Turno </title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #afbda686;;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .form-container {
+            background: rgba(229, 236, 230, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 500px;
+            border: 1px solid rgba(175, 189, 166, 0.3);
+        }
+
+        .form-title {
+            text-align: center;
+            color: #424242;
+            font-size: 2rem;
+            font-weight: 300;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .form-label {
+            display: block;
+            color: #424242;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #bdbdbb;
+            border-radius: 12px;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.9);
+            color: #424242;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .form-input:focus {
+            border-color: #65a168;
+            background: rgba(255, 255, 255, 1);
+            box-shadow: 0 0 0 3px rgba(101, 161, 104, 0.1);
+        }
+
+        .form-input::placeholder {
+            color: #bdbdbb;
+            font-style: italic;
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 100px;
+            font-family: inherit;
+        }
+
+        .optional-label {
+            color: #afbda6;
+            font-size: 0.8rem;
+            font-weight: normal;
+            margin-left: 5px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background-color: #65a168c9;
+            color: white;
+            border: 2px solid  #65a168;
+            border-radius: 9999px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #66a86a;
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .form-container {
+                padding: 30px 25px;
+                margin: 10px;
+            }
+
+            .form-title {
+                font-size: 1.7rem;
+                margin-bottom: 25px;
+            }
+
+            .form-input {
+                padding: 12px 15px;
+            }
+
+            .submit-btn {
+                padding: 15px;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .form-container {
+                padding: 25px 20px;
+            }
+
+            .form-title {
+                font-size: 1.5rem;
+            }
+
+            .form-group {
+                margin-bottom: 20px;
+            }
+        }
+
+        /* Animación de entrada */
+        .form-container {
+            animation: slideIn 0.6s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1 class="form-title">Solicitar Turno</h1>
+        
+        <form id="appointmentForm" action="#" method="POST">
+            <div class="form-group">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input 
+                    type="text" 
+                    id="nombre" 
+                    name="nombre" 
+                    class="form-input" 
+                    placeholder="Ingresa tu nombre"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="apellido" class="form-label">Apellido</label>
+                <input 
+                    type="text" 
+                    id="apellido" 
+                    name="apellido" 
+                    class="form-input" 
+                    placeholder="Ingresa tu apellido"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="telefono" class="form-label">Teléfono</label>
+                <input 
+                    type="tel" 
+                    id="telefono" 
+                    name="telefono" 
+                    class="form-input" 
+                    placeholder="Ej: +54 11 1234-5678"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="email" class="form-label">Email</label>
+                <input 
+                    type="email" 
+                    id="email" 
+                    name="email" 
+                    class="form-input" 
+                    placeholder="tu@email.com"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="motivo" class="form-label">
+                    Motivo
+                    <span class="optional-label">(opcional)</span>
+                </label>
+                <textarea 
+                    id="motivo" 
+                    name="motivo" 
+                    class="form-input form-textarea" 
+                    placeholder="Describe brevemente el motivo de tu consulta..."
+                ></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn">
+                Solicitar Turno
+            </button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('appointmentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Aquí puedes agregar la lógica para enviar el formulario
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            console.log('Datos del formulario:', data);
+            
+            // Simulación de envío exitoso
+            alert('¡Solicitud de turno enviada correctamente! Te contactaremos pronto.');
+        });
+
+        // Validación en tiempo real
+        const inputs = document.querySelectorAll('.form-input');
+        inputs.forEach(input => {
+            input.addEventListener('blur', function() {
+                if (this.hasAttribute('required') && !this.value.trim()) {
+                    this.style.borderColor = '#e74c3c';
+                } else {
+                    this.style.borderColor = '#bdbdbb';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+

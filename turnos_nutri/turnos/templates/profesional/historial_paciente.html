@@ -1,0 +1,31 @@
+<h2>Historial clínico de {{ paciente.nombre }}</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Fecha</th>
+            <th>Diagnóstico</th>
+            <th>Observaciones</th>
+            <th>Tratamiento</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for entrada in historial %}
+        <tr>
+            <td>{{ entrada.fecha }}</td>
+            <td>{{ entrada.diagnostico }}</td>
+            <td>{{ entrada.observaciones }}</td>
+            <td>{{ entrada.tratamiento }}</td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="4">No hay entradas todavía.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h3>Agregar nueva entrada</h3>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Guardar</button>
+</form>

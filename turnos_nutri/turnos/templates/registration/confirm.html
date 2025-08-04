@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NutriCitas - Reserva tu Consulta Nutricional</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #e8f5e8 0%, #f0f8f0 50%, #f5f0e8 100%);
+            min-height: 100vh;
+            color: #4A5D4A;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(139, 195, 139, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 0 20px;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 24px;
+            font-weight: 700;
+            color: #6B8E6B;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #90EE90, #8FBC8F);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: white;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 32px;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #6B8E6B;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a:hover {
+            color: #90EE90;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, #90EE90, #8FBC8F);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #6B8E6B;
+            cursor: pointer;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 80px;
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .page-title {
+            font-size: 48px;
+            font-weight: 700;
+            color: #6B8E6B;
+            margin-bottom: 16px;
+        }
+
+        .page-subtitle {
+            font-size: 18px;
+            color: #8D6E63;
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .appointment-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 48px;
+        }
+
+        .calendar-section, .time-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 32px;
+            box-shadow: 0 20px 40px rgba(139, 195, 139, 0.1);
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #6B8E6B;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* Calendar Styles */
+        .calendar {
+            width: 100%;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .calendar-nav {
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: #8FBC8F;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .calendar-nav:hover {
+            background: rgba(144, 238, 144, 0.1);
+            transform: scale(1.1);
+        }
+
+        .calendar-month {
+            font-size: 20px;
+            font-weight: 600;
+            color: #6B8E6B;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
+        }
+
+        .calendar-day-header {
+            text-align: center;
+            font-size: 12px;
+            font-weight: 600;
+            color: #8D6E63;
+            padding: 8px;
+            text-transform: uppercase;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .calendar-day:hover {
+            background: rgba(144, 238, 144, 0.1);
+            transform: scale(1.05);
+        }
+
+        .calendar-day.available {
+            color: #6B8E6B;
+        }
+
+        .calendar-day.unavailable {
+            color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .calendar-day.selected {
+            background: linear-gradient(135deg, #90EE90, #8FBC8F);
+            color: white;
+            box-shadow: 0 4px 12px rgba(139, 195, 139, 0.3);
+        }
+
+        .calendar-day.today {
+            border: 2px solid #90EE90;
+        }
+
+        /* Time Slots */
+        .time-slots {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 12px;
+        }
+
+        .time-slot {
+            padding: 16px 12px;
+            border: 2px solid #E8F5E8;
+            border-radius: 16px;
+            background: rgba(248, 255, 248, 0.8);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            color: #6B8E6B;
+        }
+
+        .time-slot:hover {
+            border-color: #90EE90;
+            background: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(139, 195, 139, 0.2);
+        }
+
+        .time-slot.selected {
+            background: linear-gradient(135deg, #90EE90, #8FBC8F);
+            color: white;
+            border-color: #8FBC8F;
+            box-shadow: 0 4px 12px rgba(139, 195, 139, 0.3);
+        }
+
+        .time-slot.unavailable {
+            opacity: 0.5;
+            cursor: not-allowed;
+            background: #f5f5f5;
+            color: #999;
+        }
+
+        .time-slot.unavailable:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Appointment Summary */
+        .appointment-summary {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 32px;
+            box-shadow: 0 20px 40px rgba(139, 195, 139, 0.1);
+            margin-bottom: 32px;
+        }
+
+        .summary-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+
+        .summary-info {
+            display: flex;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+
+        .summary-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #6B8E6B;
+        }
+
+        .summary-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #90EE90, #8FBC8F);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+        }
+
+        .summary-text {
+            font-weight: 500;
+        }
+
+        .confirm-button {
+            padding: 16px 32px;
+            background: linear-gradient(135deg, #90EE90, #8FBC8F);
+            color: white;
+            border: none;
+            border-radius: 16px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 24px rgba(139, 195, 139, 0.3);
+            min-width: 200px;
+        }
+
+        .confirm-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(139, 195, 139, 0.4);
+        }
+
+        .confirm-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border-radius: 24px;
+            padding: 48px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            animation: slideUp 0.3s ease;
+        }
+
+        .modal-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #90EE90, #8FBC8F);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: white;
+            margin: 0 auto 24px;
+        }
+
+        .modal-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #6B8E6B;
+            margin-bottom: 16px;
+        }
+
+        .modal-text {
+            font-size: 16px;
+            color: #8D6E63;
+            margin-bottom: 32px;
+            line-height: 1.6;
+        }
+
+        .modal-button {
+            padding: 16px 32px;
+            background: linear-gradient(135deg, #90EE90, #8FBC8F);
+            color: white;
+            border: none;
+            border-radius: 16px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(139, 195, 139, 0.3);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -40%);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .page-title {
+                font-size: 36px;
+            }
+
+            .appointment-container {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .calendar-section, .time-section {
+                padding: 24px;
+            }
+
+            .summary-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .summary-info {
+                justify-content: center;
+            }
+
+            .modal-content {
+                padding: 32px 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-content {
+                padding: 20px 16px;
+            }
+
+            .time-slots {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .calendar-grid {
+                gap: 4px;
+            }
+
+            .calendar-day {
+                font-size: 14px;
+            }
+        }
+
+        /* Loading State */
+        .loading {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        .loading::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            margin: -10px 0 0 -10px;
+            border: 2px solid #90EE90;
+            border-top: 2px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">🌱</div>
+                NutriCitas
+            </a>
+            <ul class="nav-menu">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+            <button class="mobile-menu-btn">☰</button>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="page-header">
+            <h1 class="page-title">Reserva tu Consulta</h1>
+            <p class="page-subtitle">
+                Selecciona la fecha y horario que mejor se adapte a tu rutina. 
+                Nuestros nutricionistas están listos para ayudarte en tu camino hacia una vida más saludable.
+            </p>
+        </div>
+
+        <div class="appointment-container">
+            <!-- Calendar Section -->
+            <div class="calendar-section">
+                <h2 class="section-title">
+                    📅 Selecciona una fecha
+                </h2>
+                <div class="calendar">
+                    <div class="calendar-header">
+                        <button class="calendar-nav" id="prevMonth">‹</button>
+                        <div class="calendar-month" id="currentMonth"></div>
+                        <button class="calendar-nav" id="nextMonth">›</button>
+                    </div>
+                    <div class="calendar-grid" id="calendarGrid">
+                        <!-- Calendar will be generated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Time Slots Section -->
+            <div class="time-section">
+                <h2 class="section-title">
+                    🕐 Horarios disponibles
+                </h2>
+                <div class="time-slots" id="timeSlots">
+                    <!-- Time slots will be generated by JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Appointment Summary -->
+        <div class="appointment-summary">
+            <div class="summary-content">
+                <div class="summary-info">
+                    <div class="summary-item">
+                        <div class="summary-icon">📅</div>
+                        <div class="summary-text" id="selectedDate">Selecciona una fecha</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-icon">🕐</div>
+                        <div class="summary-text" id="selectedTime">Selecciona un horario</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-icon">👩‍⚕️</div>
+                        <div class="summary-text">Consulta Nutricional</div>
+                    </div>
+                </div>
+                <button class="confirm-button" id="confirmButton" disabled>
+                    Confirmar Turno
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Confirmation Modal -->
+    <div class="modal" id="confirmationModal">
+        <div class="modal-content">
+            <div class="modal-icon">✅</div>
+            <h2 class="modal-title">¡Turno Confirmado!</h2>
+            <p class="modal-text">
+                Tu consulta nutricional ha sido reservada con éxito. 
+                Te enviaremos un recordatorio por email 24 horas antes de tu cita.
+            </p>
+            <button class="modal-button" onclick="closeModal()">
+                Perfecto
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Calendar functionality
+        class AppointmentCalendar {
+            constructor() {
+                this.currentDate = new Date();
+                this.selectedDate = null;
+                this.selectedTime = null;
+                this.availableTimes = [
+                    '09:00', '09:30', '10:00', '10:30', '11:00', '11:30',
+                    '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00'
+                ];
+                this.unavailableDates = [
+                    // Simulate some unavailable dates
+                    new Date(2024, 11, 25), // Christmas
+                    new Date(2024, 0, 1),   // New Year
+                ];
+                
+                this.init();
+            }
+
+            init() {
+                this.renderCalendar();
+                this.renderTimeSlots();
+                this.bindEvents();
+            }
+
+            bindEvents() {
+                document.getElementById('prevMonth').addEventListener('click', () => {
+                    this.currentDate.setMonth(this.currentDate.getMonth() - 1);
+                    this.renderCalendar();
+                });
+
+                document.getElementById('nextMonth').addEventListener('click', () => {
+                    this.currentDate.setMonth(this.currentDate.getMonth() + 1);
+                    this.renderCalendar();
+                });
+
+                document.getElementById('confirmButton').addEventListener('click', () => {
+                    this.confirmAppointment();
+                });
+            }
+
+            renderCalendar() {
+                const monthNames = [
+                    'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+                    'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+                ];
+
+                const dayNames = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
+
+                document.getElementById('currentMonth').textContent = 
+                    `${monthNames[this.currentDate.getMonth()]} ${this.currentDate.getFullYear()}`;
+
+                const firstDay = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), 1);
+                const lastDay = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() + 1, 0);
+                const today = new Date();
+
+                let calendarHTML = '';
+
+                // Day headers
+                dayNames.forEach(day => {
+                    calendarHTML += `<div class="calendar-day-header">${day}</div>`;
+                });
+
+                // Empty cells for days before month starts
+                for (let i = 0; i < firstDay.getDay(); i++) {
+                    calendarHTML += '<div class="calendar-day"></div>';
+                }
+
+                // Days of the month
+                for (let day = 1; day <= lastDay.getDate(); day++) {
+                    const currentDay = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), day);
+                    const isPast = currentDay < today.setHours(0, 0, 0, 0);
+                    const isToday = currentDay.toDateString() === new Date().toDateString();
+                    const isSelected = this.selectedDate && currentDay.toDateString() === this.selectedDate.toDateString();
+                    const isUnavailable = this.unavailableDates.some(date => 
+                        date.toDateString() === currentDay.toDateString()
+                    );
+
+                    let classes = 'calendar-day';
+                    if (isPast || isUnavailable) {
+                        classes += ' unavailable';
+                    } else {
+                        classes += ' available';
+                    }
+                    if (isToday) classes += ' today';
+                    if (isSelected) classes += ' selected';
+
+                    calendarHTML += `
+                        <div class="${classes}" data-date="${currentDay.toISOString()}" 
+                             onclick="calendar.selectDate('${currentDay.toISOString()}')">
+                            ${day}
+                        </div>
+                    `;
+                }
+
+                document.getElementById('calendarGrid').innerHTML = calendarHTML;
+            }
+
+            selectDate(dateString) {
+                const date = new Date(dateString);
+                const today = new Date();
+                
+                if (date < today.setHours(0, 0, 0, 0)) return;
+
+                this.selectedDate = date;
+                this.renderCalendar();
+                this.updateSummary();
+                this.renderTimeSlots();
+            }
+
+            renderTimeSlots() {
+                let slotsHTML = '';
+                
+                this.availableTimes.forEach(time => {
+                    const isSelected = this.selectedTime === time;
+                    const isUnavailable = Math.random() > 0.8; // Simulate some unavailable slots
+                    
+                    let classes = 'time-slot';
+                    if (isSelected) classes += ' selected';
+                    if (isUnavailable && !isSelected) classes += ' unavailable';
+
+                    slotsHTML += `
+                        <div class="${classes}" 
+                             onclick="calendar.selectTime('${time}')"
+                             ${isUnavailable && !isSelected ? 'style="pointer-events: none;"' : ''}>
+                            ${time}
+                        </div>
+                    `;
+                });
+
+                document.getElementById('timeSlots').innerHTML = slotsHTML;
+            }
+
+            selectTime(time) {
+                this.selectedTime = time;
+                this.renderTimeSlots();
+                this.updateSummary();
+            }
+
+            updateSummary() {
+                const dateElement = document.getElementById('selectedDate');
+                const timeElement = document.getElementById('selectedTime');
+                const confirmButton = document.getElementById('confirmButton');
+
+                if (this.selectedDate) {
+                    const options = { 
+                        weekday: 'long', 
+                        year: 'numeric', 
+                        month: 'long', 
+                        day: 'numeric' 
+                    };
+                    dateElement.textContent = this.selectedDate.toLocaleDateString('es-ES', options);
+                } else {
+                    dateElement.textContent = 'Selecciona una fecha';
+                }
+
+                if (this.selectedTime) {
+                    timeElement.textContent = this.selectedTime;
+                } else {
+                    timeElement.textContent = 'Selecciona un horario';
+                }
+
+                confirmButton.disabled = !(this.selectedDate && this.selectedTime);
+            }
+
+            confirmAppointment() {
+                if (!this.selectedDate || !this.selectedTime) return;
+
+                // Show loading state
+                const button = document.getElementById('confirmButton');
+                button.textContent = 'Confirmando...';
+                button.disabled = true;
+
+                // Simulate API call
+                setTimeout(() => {
+                    this.showConfirmationModal();
+                    button.textContent = 'Confirmar Turno';
+                    button.disabled = false;
+                }, 1500);
+            }
+
+            showConfirmationModal() {
+                document.getElementById('confirmationModal').style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        // Initialize calendar
+        const calendar = new AppointmentCalendar();
+
+        // Modal functions
+        function closeModal() {
+            document.getElementById('confirmationModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+            
+            // Reset form
+            calendar.selectedDate = null;
+            calendar.selectedTime = null;
+            calendar.renderCalendar();
+            calendar.renderTimeSlots();
+            calendar.updateSummary();
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('confirmationModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Mobile menu functionality
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            const navMenu = document.querySelector('.nav-menu');
+            navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                // Add smooth scrolling logic here if needed
+            });
+        });
+
+        // Add floating elements animation
+        function createFloatingElements() {
+            const elements = ['🥗', '🥑', '🍎', '🥕', '🌿', '🍃'];
+            
+            setInterval(() => {
+                if (Math.random() > 0.9) {
+                    const element = document.createElement('div');
+                    element.textContent = elements[Math.floor(Math.random() * elements.length)];
+                    element.style.position = 'fixed';
+                    element.style.left = Math.random() * 100 + 'vw';
+                    element.style.top = '100vh';
+                    element.style.opacity = '0.1';
+                    element.style.fontSize = '24px';
+                    element.style.pointerEvents = 'none';
+                    element.style.transition = 'all 8s ease-out';
+                    element.style.zIndex = '1';
+                    
+                    document.body.appendChild(element);
+                    
+                    setTimeout(() => {
+                        element.style.top = '-100px';
+                        element.style.opacity = '0';
+                        element.style.transform = 'rotate(360deg)';
+                    }, 100);
+                    
+                    setTimeout(() => {
+                        element.remove();
+                    }, 8000);
+                }
+            }, 3000);
+        }
+
+        // Start floating elements when page loads
+        window.addEventListener('load', () => {
+            createFloatingElements();
+        });
+    </script>
+</body>
+</html>

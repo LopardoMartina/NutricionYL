@@ -1,0 +1,23 @@
+
+<h2>Lista de todos los turnos</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Correo</th>
+      <th>Fecha</th>
+      <th>Hora</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for turno in turnos %}
+    <tr>
+      <td>{{ turno.nombre }}</td>
+      <td>{{ turno.correo }}</td>
+      <td>{{ turno.fecha }}</td>
+      <td>{{ turno.hora }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
