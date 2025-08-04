@@ -557,6 +557,13 @@ body {
     background-color: var(--primary-green);
     transform: translateY(-3px);
 }
+
+.contact-item span {
+    color: inherit;       /* usa el color normal del texto */
+    text-decoration: none; /* sin subrayado */
+    cursor: default;      /* cursor normal, no de link */
+}
+
 .contact-form-container {
     background-color: white;
     border-radius: 0.75rem;
@@ -807,4 +814,5 @@ footer {
         grid-template-columns: 1fr;
     }
 }
+
 
