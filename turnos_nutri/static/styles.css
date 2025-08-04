@@ -6,6 +6,8 @@
     --light-gray: #F5F5F5;
     --green-gray: #afbda6;
     --brown: #bdbdbb;
+    --primary: #65a168;
+    --primary-hover: #5b885dc5;
 }
 
 body {
@@ -19,6 +21,7 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 1rem;
+    background: none;
 }
 
 
@@ -62,12 +65,12 @@ body {
 }
 
 .nav-link:hover {
-    color: var(--primary-green) !important;
+    color: var(--primary-green);
 }
 
 .nav-link.btn-nav{
     background-color: var(--primary);
-    color: white !important;
+    color: white;
     padding: 0.5rem 1rem;
     border-radius: 9999px;
 }
@@ -223,13 +226,18 @@ body {
 
 .hero-image-wrapper {
     position: relative;
+    width: 300px; 
+    height: 300px;
     z-index: 1;
-    background-color: white;
     padding: 0.5rem;
-    border-radius: 1rem;
+    border-radius: 50%;
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
     transform: rotate(3deg);
     transition: transform 0.3s ease;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .hero-image-wrapper:hover {
@@ -237,9 +245,10 @@ body {
 }
 
 .hero-image {
-    border-radius: 0.75rem;
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
 }
 
 
@@ -327,7 +336,7 @@ body {
 /* Service Section */
 .services {
     padding: 8rem 0;
-    background-color: white;
+    background: #e5ece6;
 }
 
 .text-center {
@@ -428,6 +437,7 @@ body {
     width: 13rem;
     height: 13rem;
     border-radius: 50%;
+    z-index: -1;
     background-color: rgba(255, 255, 255, 0.212);
 }
 
@@ -453,12 +463,14 @@ body {
     font-weight: 700;
     color: var(--dark-gray);
     margin-bottom: 1rem;
+    z-index: 2;
 }
 
 .cta-text {
     font-size: 1.125rem;
     color: #666;
     margin-bottom: 2rem;
+    z-index: 1;
 }
 
 
@@ -683,9 +695,6 @@ footer {
 }
 
 
-
-
-
 /* Responsive */
 @media (max-width: 1024px) {
     .hero-title {
@@ -713,6 +722,7 @@ footer {
 
     .hero-image-container {
         display: none;
+        background-color: var(--brown);
     }
     
     .hero-title {
